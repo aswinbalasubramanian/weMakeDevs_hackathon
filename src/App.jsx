@@ -1,5 +1,6 @@
 import { Layout } from "antd";
 import Home from "./pages/Home";
+import React from "react";
 
 const {Header,Content} = Layout;
 
