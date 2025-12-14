@@ -7,14 +7,14 @@ const {Header,Content} = Layout;
 function App() {
   
   return (
-    <Layout>
+    <Layout style={{ minHeight: "100vh" }}>
       <Header>
         <div style={{ color: "#fff", fontSize: 20 }}>
           Dev Productivity Hub
         </div>
       </Header>
 
-      <Content style={{ padding: "24px" }}>
+      <Content style={{ padding: "0", flex: 1 }}>
         <Home />
       </Content>
     </Layout>
