@@ -35,7 +35,12 @@ export default function CodeReviewer() {
         onChange={(e) => setCode(e.target.value)}
       />
 
-      <Button type="primary" onClick={reviewCode} loading={loading} style={{ marginTop: 10 }}>
+      <Button 
+      type="primary" 
+      onClick={reviewCode} 
+      loading={loading} 
+      style={{ marginTop: 10 }}
+      disabled={!code.trim()}>
         Review
       </Button>
       {error && <p style={{ color: "red" }}>{error}</p>}

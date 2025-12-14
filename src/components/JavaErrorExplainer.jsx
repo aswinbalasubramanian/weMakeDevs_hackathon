@@ -34,7 +34,8 @@ export default function JavaErrorExplainer() {
         onChange={(e) => setErr(e.target.value)}
       />
 
-      <Button type="primary" onClick={explain} loading={loading} style={{ marginTop: 10 }}>
+      <Button type="primary" onClick={explain} loading={loading} style={{ marginTop: 10 }}
+      disabled={!err.trim()}>
         Explain
       </Button>
       {error && <p style={{ color: "red" }}>{error}</p>}

@@ -33,7 +33,9 @@ export default function RegexBuilder() {
         onChange={(e) => setPattern(e.target.value)}
       />
 
-      <Button type="primary" onClick={build} loading={loading} style={{ marginTop: 10 }}>
+      <Button type="primary" onClick={build} loading={loading} 
+      disabled={!pattern.trim()}
+      style={{ marginTop: 10 }}>
         Build Regex
       </Button>
       {error && <p style={{ color: "red" }}>{error}</p>}

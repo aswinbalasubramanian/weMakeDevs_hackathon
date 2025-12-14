@@ -1,7 +1,7 @@
 import { Layout } from "antd";
 import Home from "./pages/Home";
 
-const { Header, Content } = Layout;
+const { Header, Content, Footer } = Layout;
 
 function App() {
   return (
