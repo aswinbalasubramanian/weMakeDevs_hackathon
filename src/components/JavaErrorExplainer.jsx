@@ -6,10 +6,23 @@ export default function JavaErrorExplainer() {
   const [err, setErr] = useState("");
   const [explanation, setExplanation] = useState("");
 
+  const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+
   const explain = async () => {
     if (!err.trim()) return;
-    const res = await askAI(`Explain this Java error: ${err}`);
-    setExplanation(res);
+
+    setLoading(true);
+        setError("");
+    
+    try {
+      const res = await askAI(`Explain this Java error: ${err}`);
+      setExplanation(res);
+    } catch (e) {
+        setError(e.message);
+    } finally {
+        setLoading(false);
+    }
   };
 
   return (

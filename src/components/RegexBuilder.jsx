@@ -6,10 +6,23 @@ export default function RegexBuilder() {
   const [pattern, setPattern] = useState("");
   const [result, setResult] = useState("");
 
+
+  const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+
   const build = async () => {
     if (!pattern.trim()) return;
-    const res = await askAI(`Convert this into a regex: ${pattern}`);
-    setResult(res);
+
+     setLoading(true);
+        setError("");
+    try {
+      const res = await askAI(`Convert this into a regex: ${pattern}`);
+      setResult(res);
+    } catch (e) {
+        setError(e.message);
+    } finally {
+        setLoading(false);
+    }    
   };
 
   return (

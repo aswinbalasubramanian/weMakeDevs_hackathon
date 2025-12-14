@@ -1,9 +1,14 @@
 import 'dotenv/config';
 
 export default async function handler(req, res) {
-  const { prompt } = req.body;
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
 
-  if (!prompt) return res.status(400).json({ error: "Prompt missing" });
+  const { prompt } = req.body;
+  if (!prompt) {
+    return res.status(400).json({ error: 'Prompt missing' });
+  }
 
   try {
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
@@ -20,12 +25,18 @@ export default async function handler(req, res) {
       }),
     });
 
+    // Check for upstream errors
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => null);
+      return res.status(response.status).json({ error: errorData?.error ?? response.statusText });
+    }
+
     const data = await response.json();
 
-    res.status(200).json({
+    return res.status(200).json({
       text: data.choices?.[0]?.message?.content ?? "",
     });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    return res.status(500).json({ error: err.message });
   }
 }

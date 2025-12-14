@@ -6,10 +6,24 @@ export default function CodeReviewer() {
   const [code, setCode] = useState("");
   const [review, setReview] = useState("");
 
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+
+
   const reviewCode = async () => {
     if (!code.trim()) return;
-    const res = await askAI(`Review this code:\n${code}`);
-    setReview(res);
+
+    setLoading(true);
+        setError("");
+
+    try {
+      const res = await askAI(`Review this code:\n${code}`);
+      setReview(res);
+    } catch (e) {
+        setError(e.message);
+    } finally {
+        setLoading(false);
+    }
   };
 
   return (
