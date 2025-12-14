@@ -7,21 +7,21 @@ export default function JavaErrorExplainer() {
   const [explanation, setExplanation] = useState("");
 
   const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
+  const [error, setError] = useState("");
 
   const explain = async () => {
     if (!err.trim()) return;
 
     setLoading(true);
-        setError("");
-    
+    setError("");
+
     try {
       const res = await askAI(`Explain this Java error: ${err}`);
       setExplanation(res);
     } catch (e) {
-        setError(e.message);
+      setError(e.message);
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
   };
 
@@ -34,10 +34,10 @@ export default function JavaErrorExplainer() {
         onChange={(e) => setErr(e.target.value)}
       />
 
-      <Button type="primary" onClick={explain} style={{ marginTop: 10 }}>
+      <Button type="primary" onClick={explain} loading={loading} style={{ marginTop: 10 }}>
         Explain
       </Button>
-
+      {error && <p style={{ color: "red" }}>{error}</p>}
       {explanation && (
         <pre style={{ marginTop: 10, background: "#eee", padding: 10 }}>
           {explanation}

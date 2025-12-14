@@ -8,21 +8,21 @@ export default function RegexBuilder() {
 
 
   const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
+  const [error, setError] = useState("");
 
   const build = async () => {
     if (!pattern.trim()) return;
 
-     setLoading(true);
-        setError("");
+    setLoading(true);
+    setError("");
     try {
       const res = await askAI(`Convert this into a regex: ${pattern}`);
       setResult(res);
     } catch (e) {
-        setError(e.message);
+      setError(e.message);
     } finally {
-        setLoading(false);
-    }    
+      setLoading(false);
+    }
   };
 
   return (
@@ -33,10 +33,10 @@ export default function RegexBuilder() {
         onChange={(e) => setPattern(e.target.value)}
       />
 
-      <Button type="primary" onClick={build} style={{ marginTop: 10 }}>
+      <Button type="primary" onClick={build} loading={loading} style={{ marginTop: 10 }}>
         Build Regex
       </Button>
-
+      {error && <p style={{ color: "red" }}>{error}</p>}
       {result && (
         <pre style={{ marginTop: 10, background: "#fafafa", padding: 10 }}>
           {result}

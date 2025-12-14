@@ -6,23 +6,23 @@ export default function CodeReviewer() {
   const [code, setCode] = useState("");
   const [review, setReview] = useState("");
 
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
 
   const reviewCode = async () => {
     if (!code.trim()) return;
 
     setLoading(true);
-        setError("");
+    setError("");
 
     try {
       const res = await askAI(`Review this code:\n${code}`);
       setReview(res);
     } catch (e) {
-        setError(e.message);
+      setError(e.message);
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
   };
 
@@ -35,10 +35,10 @@ export default function CodeReviewer() {
         onChange={(e) => setCode(e.target.value)}
       />
 
-      <Button type="primary" onClick={reviewCode} style={{ marginTop: 10 }}>
+      <Button type="primary" onClick={reviewCode} loading={loading} style={{ marginTop: 10 }}>
         Review
       </Button>
-
+      {error && <p style={{ color: "red" }}>{error}</p>}
       {review && (
         <pre style={{ marginTop: 10, background: "#f0f0f0", padding: 10 }}>
           {review}
