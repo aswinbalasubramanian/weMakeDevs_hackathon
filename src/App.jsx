@@ -15,6 +15,9 @@ function App() {
       <Content style={{ padding: 24 }}>
         <Home />
       </Content>
+      <Footer style={{ textAlign: "center", fontSize: 12, color: "#888" }}>
+        Built with ❤️ by <strong>Aswin & Harish</strong> for weMakeDevs Hackathon 2025
+      </Footer>
     </Layout>
   );
 }
